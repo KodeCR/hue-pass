@@ -1,0 +1,16 @@
+[Unit]
+Description=HuePass
+After=multi-user.target
+
+[Service]
+Type=idle
+Restart=always
+RestartSec=30
+StartLimitInterval=200
+StartLimitBurst=5
+
+WorkingDirectory=/opt/hue-pass
+ExecStart=/opt/hue-pass/HuePass.py
+
+[Install]
+WantedBy=multi-user.target
