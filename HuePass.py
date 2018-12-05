@@ -88,9 +88,8 @@ def serverSSDPResponse(ip, port, bridgeid, uuid, stop):
 	sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, struct.pack('4sL', socket.inet_aton('239.255.255.250'), socket.INADDR_ANY))
 	sock.bind(('', 1900))
 	message =  'HTTP/1.1 200 OK\r\n'
-	message += 'HOST: 239.255.255.250:1900\r\n'
-	message += 'EXT:\r\n'
 	message += 'CACHE-CONTROL: max-age=100\r\n'
+	message += 'EXT:\r\n'
 	message += 'LOCATION: http://' + ip + ':' + str(port) + '/description.xml\r\n'
 	message += 'SERVER: Linux/3.14.0 UPnP/1.0 IpBridge/1.26.0\r\n'
 	message += 'hue-bridgeid: ' + bridgeid + '\r\n'
