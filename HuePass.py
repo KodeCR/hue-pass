@@ -17,6 +17,7 @@ from subprocess import check_output
 from collections import defaultdict
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
+from requests.models import Response
 
 # setup
 def getBridgeIDs():
@@ -64,37 +65,61 @@ class Handler(BaseHTTPRequestHandler):
 
 	def do_OPTIONS(self):
 		logging.debug("OPTIONS: " + self.path)
-		r = requests.options('http://127.0.0.1:80' + self.path)
-		self._respond(r)
+		try:
+			r = requests.options('http://127.0.0.1:80' + self.path)
+			self._respond(r)
+		except:
+			logging.error("OPTIONS: " + self.path)
+			self._send(500, {"Content-Length": 0}, {})
 
 	def do_HEAD(self):
 		logging.debug("HEAD: " + self.path)
-		r = requests.head('http://127.0.0.1:80' + self.path)
-		self._respond(r)
+		try:
+			r = requests.head('http://127.0.0.1:80' + self.path)
+			self._respond(r)
+		except:
+			logging.error("HEAD: " + self.path)
+			self._send(500, {"Content-Length": 0}, {})
 
 	def do_GET(self):
 		logging.debug("GET: " + self.path)
-		r = requests.get('http://127.0.0.1:80' + self.path)
-		self._respond(r)
+		try:
+			r = requests.get('http://127.0.0.1:80' + self.path)
+			self._respond(r)
+		except:
+			logging.error("GET: " + self.path)
+			self._send(500, {"Content-Length": 0}, {})
 
 	def do_PUT(self):
 		length = int(self.headers['Content-Length'])
 		content = self.rfile.read(length)
 		logging.debug("PUT: " + self.path + ' - ' + str(content))
-		r = requests.put('http://127.0.0.1:80' + self.path, data = content)
-		self._respond(r)
+		try:
+			r = requests.put('http://127.0.0.1:80' + self.path, data = content)
+			self._respond(r)
+		except:
+			logging.error("PUT: " + self.path + ' - ' + str(content))
+			self._send(500, {"Content-Length": 0}, {})
 
 	def do_POST(self):
 		length = int(self.headers['Content-Length'])
 		content = self.rfile.read(length)
 		logging.debug("POST: " + self.path + ' - ' + str(content))
-		r = requests.post('http://127.0.0.1:80' + self.path, data = content)
-		self._respond(r)
+		try:
+			r = requests.post('http://127.0.0.1:80' + self.path, data = content)
+			self._respond(r)
+		except:
+			logging.error("POST: " + self.path + ' - ' + str(content))
+			self._send(500, {"Content-Length": 0}, {})
 
 	def do_DELETE(self):
 		logging.debug("DELETE: " + self.path)
-		r = requests.delete('http://127.0.0.1:80' + self.path)
-		self._respond(r)
+		try:
+			r = requests.delete('http://127.0.0.1:80' + self.path)
+			self._respond(r)
+		except:
+			logging.error("DELETE: " + self.path)
+			self._send(500, {"Content-Length": 0}, {})
 
 class HueHTTPSServer(ThreadingMixIn, HTTPServer):
 	def run(self):

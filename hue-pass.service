@@ -1,6 +1,6 @@
 [Unit]
 Description=HuePass
-After=multi-user.target
+After=multi-user.target deconz.service deconz-gui.service
 
 [Service]
 Type=idle
