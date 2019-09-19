@@ -1,0 +1,2 @@
+#PLATFORM=-platform minimal
+DISPLAY=:0
