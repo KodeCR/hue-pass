@@ -138,7 +138,10 @@ class HueHTTPSServer(ThreadingMixIn, HTTPServer):
 # main
 def main():
 	print("HuePass")
-	logging.basicConfig(level=logging.INFO)
+	if len(sys.argv) > 1 and sys.argv[1] == "--debug":
+		logging.basicConfig(level=logging.DEBUG)
+	else:
+		logging.basicConfig(level=logging.INFO)
 	startedHTTPS = False
 	(bridgeid, uuid) = getBridgeIDs()
 
