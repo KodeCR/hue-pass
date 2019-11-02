@@ -5,7 +5,7 @@ This is a Hue REST API wrapper that sets up a Hue app compatible HTTPS server an
 ```
 cd /opt
 sudo git clone https://github.com/KodeCR/hue-pass
-ch hue-pass
+cd hue-pass
 sudo ./install.sh
 ```
 
