@@ -5,6 +5,7 @@ This is a Hue REST API wrapper that sets up a Hue app compatible HTTPS server an
 ```
 cd /opt
 sudo git clone https://github.com/KodeCR/hue-pass
+ch hue-pass
 sudo ./install.sh
 ```
 
@@ -13,4 +14,8 @@ Hue-pass will pass through to the localhost (127.0.0.1) at port 80, and enables 
 
 The `install.sh` script does the above for you, and installs hue-pass as a (systemd) service.
 
-The `uninstall.sh` script uninstalls the hue-pass service and undoes modifications on deconz service configurations.
+The `uninstall.sh` script uninstalls the hue-pass service and undoes modifications on deconz service configurations:
+```
+cd /opt/hue-pass
+sudo ./uninstall.sh
+```
